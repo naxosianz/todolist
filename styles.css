@@ -1,0 +1,271 @@
+:root {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --border: #e3e6ee;
+  --primary: #4f6df5;
+  --primary-hover: #3b56d4;
+  --danger: #e25b5b;
+  --text: #1f2330;
+  --text-muted: #6b7280;
+  --shadow: 0 4px 16px rgba(20, 30, 60, 0.06);
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR",
+    Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.app-header h1 {
+  margin: 0 0 6px;
+  font-size: 28px;
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.group-create {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.group-create input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.group-create input:focus {
+  border-color: var(--primary);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+#addGroupBtn {
+  padding: 12px 18px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+#addGroupBtn:hover {
+  background: var(--primary-hover);
+}
+
+.groups-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 60px 0;
+  font-size: 14px;
+}
+
+/* Group Card */
+.group-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.group-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+  outline: none;
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+
+.group-title[contenteditable="true"] {
+  background: #fff8d6;
+}
+
+.group-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.group-actions button,
+.todo-actions button {
+  background: transparent;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.group-actions button:hover,
+.todo-actions button:hover {
+  background: #f0f1f5;
+}
+
+.btn-delete-group:hover,
+.btn-delete:hover {
+  background: #fdecec !important;
+}
+
+.todo-form {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.todo-input:focus {
+  border-color: var(--primary);
+}
+
+.btn-add-todo {
+  padding: 9px 14px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-add-todo:hover {
+  background: var(--primary-hover);
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 60px;
+}
+
+.todo-list.drag-over {
+  background: #eef2ff;
+  border-radius: 8px;
+}
+
+/* Todo Item */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #fafbfd;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: background 0.15s, opacity 0.15s, transform 0.15s;
+}
+
+.todo-item.dragging {
+  opacity: 0.4;
+}
+
+.todo-item.drop-target-above {
+  border-top: 2px solid var(--primary);
+}
+
+.todo-item.drop-target-below {
+  border-bottom: 2px solid var(--primary);
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  user-select: none;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.todo-check {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 14px;
+  word-break: break-word;
+  outline: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.todo-text.editing {
+  background: #fff8d6;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 2px;
+}
+
+@media (max-width: 600px) {
+  .groups-container {
+    grid-template-columns: 1fr;
+  }
+}

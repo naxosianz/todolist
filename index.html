@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoList</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>📝 To-Do List</h1>
+      <p class="subtitle">그룹별로 할 일을 정리하고 순서를 조정해 보세요.</p>
+    </header>
+
+    <section class="group-create">
+      <input
+        id="groupNameInput"
+        type="text"
+        placeholder="새 그룹 이름 (예: 업무, 개인, 학습)"
+        aria-label="새 그룹 이름"
+        maxlength="30"
+      />
+      <button id="addGroupBtn" type="button">+ 그룹 추가</button>
+    </section>
+
+    <main id="groupsContainer" class="groups-container" aria-live="polite">
+      <!-- 그룹 카드들이 동적으로 렌더링됩니다 -->
+    </main>
+
+    <p id="emptyState" class="empty-state" hidden>
+      아직 그룹이 없어요. 위에서 첫 그룹을 추가해 보세요.
+    </p>
+  </div>
+
+  <template id="groupTemplate">
+    <section class="group-card" data-group-id="">
+      <header class="group-header">
+        <h2 class="group-title" contenteditable="false"></h2>
+        <div class="group-actions">
+          <button class="btn-rename" type="button" title="이름 변경">✏️</button>
+          <button class="btn-delete-group" type="button" title="그룹 삭제">🗑️</button>
+        </div>
+      </header>
+
+      <form class="todo-form">
+        <input
+          type="text"
+          class="todo-input"
+          placeholder="할 일을 입력하고 Enter"
+          aria-label="할 일 입력"
+          maxlength="120"
+        />
+        <button type="submit" class="btn-add-todo">추가</button>
+      </form>
+
+      <ul class="todo-list" aria-label="할 일 목록"></ul>
+    </section>
+  </template>
+
+  <template id="todoTemplate">
+    <li class="todo-item" draggable="true" data-todo-id="">
+      <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+      <input type="checkbox" class="todo-check" aria-label="완료 표시" />
+      <span class="todo-text"></span>
+      <div class="todo-actions">
+        <button class="btn-edit" type="button" title="수정">✏️</button>
+        <button class="btn-delete" type="button" title="삭제">🗑️</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
