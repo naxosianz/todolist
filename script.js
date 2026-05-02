@@ -240,10 +240,11 @@ addGroupBtn.addEventListener("click", () => {
 });
 
 groupNameInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    addGroupBtn.click();
-  }
+  if (e.key !== "Enter") return;
+  // 한글 IME 조합 중 Enter는 조합 확정용이므로 무시 (이중 입력 방지)
+  if (e.isComposing || e.keyCode === 229) return;
+  e.preventDefault();
+  addGroupBtn.click();
 });
 
 groupsContainer.addEventListener("submit", (e) => {
@@ -362,12 +363,25 @@ groupsContainer.addEventListener(
 
 groupsContainer.addEventListener("keydown", (e) => {
   const t = e.target;
+
+  // 할일 input: IME 조합 중 Enter는 form submit을 발생시키지 않도록 차단
+  if (
+    e.key === "Enter" &&
+    (e.isComposing || e.keyCode === 229) &&
+    t.classList?.contains("todo-input")
+  ) {
+    e.preventDefault();
+    return;
+  }
+
   if (
     (t.classList?.contains("group-title") ||
       t.classList?.contains("todo-text")) &&
     t.isContentEditable
   ) {
     if (e.key === "Enter") {
+      // IME 조합 중 Enter는 무시 (조합 확정만 하고 편집 종료는 안 함)
+      if (e.isComposing || e.keyCode === 229) return;
       e.preventDefault();
       t.blur();
     } else if (e.key === "Escape") {
